@@ -1,0 +1,77 @@
+<h1 class="page-title">Pacientes</h1>
+
+<mat-card class="patient-card">
+  <mat-card-title>
+    <button mat-raised-button color="primary" class="add-button" (click)="nuevoUsuario()">
+      <mat-icon matListItemIcon>add</mat-icon>Nuevo Paciente
+    </button>
+  </mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content class="dashboard-card-content">
+    <mat-form-field class="search-field">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+    <div class="table-container">
+      <table mat-table [dataSource]="dataLista">
+        <ng-container matColumnDef="Dni">
+          <th mat-header-cell *matHeaderCellDef>DNI</th>
+          <td mat-cell *matCellDef="let element"> {{element.personas[0].dni}} </td>
+      </ng-container>
+        <ng-container matColumnDef="Nombres">
+            <th mat-header-cell *matHeaderCellDef>Nombres</th>
+            <td mat-cell *matCellDef="let element"> {{element.personas[0].nombres}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Apellidos">
+            <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+            <td mat-cell *matCellDef="let element"> {{element.personas[0].apellidos}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechaNacimineto">
+            <th mat-header-cell *matHeaderCellDef>Fecha Nacimiento</th>
+            <td mat-cell *matCellDef="let element"> {{element.personas[0].fechaNacimiento}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Celular">
+            <th mat-header-cell *matHeaderCellDef>Celular</th>
+            <td mat-cell *matCellDef="let element"> {{element.personas[0].celular}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Genero">
+            <th mat-header-cell *matHeaderCellDef>Genero</th>
+            <td mat-cell *matCellDef="let element"> {{element.personas[0].genero}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Correo">
+            <th mat-header-cell *matHeaderCellDef>Correo</th>
+            <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let element"> 
+              <mat-chip-option [color]="element.activo === 1 ? 'primary' : 'warn'" selected>{{element.activo === 1 ? 'Activo' : 'No Activo'}}</mat-chip-option>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+            <th mat-header-cell *matHeaderCellDef style="width: 150px;"></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="editarUsuario(element)">
+                    <mat-icon style="color: #ECAA2E;">edit</mat-icon>
+                    <span>Editar</span>
+                  </button>
+                  <button mat-menu-item (click)="element.activo == 1 ? desactivar(element.personas[0].pacientes![0].idPaciente, element.nombreUsuario): activar(element.personas[0].pacientes![0].idPaciente, element.nombreUsuario)">
+                    <mat-icon [ngClass]="{'color-icon-enable': element.activo == 1, 'color-icon-desabled': element.activo == 0}">{{element.activo == 1 ? 'person_off': 'how_to_reg'}}</mat-icon>
+                    <span>{{element.activo == 1 ? 'Desabilitar': 'Habilitar'}}</span>
+                  </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+      </table>
+      <mat-progress-spinner style="margin: 10px auto;" *ngIf="cargandoTablaDatos" diameter="50" mode="indeterminate"></mat-progress-spinner>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

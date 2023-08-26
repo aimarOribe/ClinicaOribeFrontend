@@ -1,0 +1,90 @@
+<h2 mat-dialog-title class="dialog-title">{{tituloAccion}} Doctor</h2>
+<mat-dialog-content>
+  <form [formGroup]="formulario" class="form-container">
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Dni</mat-label>
+        <input matInput autocomplete="off" formControlName="dni">
+        <mat-icon matSuffix>badge</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Nombres</mat-label>
+        <input matInput autocomplete="off" formControlName="nombres">
+        <mat-icon matSuffix>portrait</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Apellidos</mat-label>
+        <input matInput autocomplete="off" formControlName="apellidos">
+        <mat-icon matSuffix>portrait</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Nombre de Usuario</mat-label>
+        <input matInput autocomplete="off" formControlName="nombreUsuario">
+        <mat-icon matSuffix>manage_accounts</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Correo</mat-label>
+        <input matInput autocomplete="off" formControlName="correo">
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput autocomplete="off" formControlName="fechaNacimiento" [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Genero</mat-label>
+        <mat-select formControlName="genero">
+          <mat-option value="Masculino">Masculino</mat-option>
+          <mat-option value="Femenino">Femenino</mat-option>
+          <mat-option value="Indefinido">Prefiero no Contestar</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Celular</mat-label>
+        <input matInput autocomplete="off" formControlName="celular">
+        <mat-icon matSuffix>phone_android</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Especialidad</mat-label>
+          <mat-select formControlName="idEspecialidad">
+              <mat-option *ngFor="let item of listaEspecialidades" [value]="item.idEspecialidad">
+                  {{item.nombre}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Fecha Contratacion Inicio</mat-label>
+        <input matInput autocomplete="off" formControlName="horarioInicio" [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Horario Contratacion Fin</mat-label>
+        <input matInput autocomplete="off" formControlName="horarioFin" [matDatepicker]="picker3">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div *ngIf="!cargando">
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    <button mat-raised-button color="primary" [disabled]="formulario.invalid" (click)="guardarEditar()">
+      {{botonAccion}}
+    </button>
+  </div>
+  <mat-progress-spinner style="margin: 10px auto;" *ngIf="cargando" diameter="50" mode="indeterminate"></mat-progress-spinner>
+</mat-dialog-actions>

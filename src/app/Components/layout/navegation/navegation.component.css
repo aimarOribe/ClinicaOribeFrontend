@@ -1,0 +1,43 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.nav-icon {
+  margin-right: 8px; /* Ajusta el espacio entre el icono y el texto */
+  vertical-align: middle; /* Alinea verticalmente el icono con el texto */
+}
+
+.nav-text {
+  vertical-align: middle; /* Alinea verticalmente el texto con el icono */
+}
+
+.mat-sidenav-container {
+  background-color: #f0f0f0; /* Cambia este color según tus preferencias */
+}
+
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-name {
+  margin-left: 8px;
+}

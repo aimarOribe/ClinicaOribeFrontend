@@ -1,0 +1,70 @@
+<h2 mat-dialog-title class="dialog-title">{{tituloAccion}} Cita</h2>
+<mat-dialog-content>
+  <form [formGroup]="formulario" class="form-container">
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Fecha y Hora Inicio</mat-label>
+        <input type="datetime-local" matInput autocomplete="off" formControlName="fechaInicio">
+        <mat-icon matSuffix>calendar_month</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Fecha y Hora Fin</mat-label>
+        <input type="datetime-local" matInput autocomplete="off" formControlName="fechaFin">
+        <mat-icon matSuffix>calendar_month</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Especialidad</mat-label>
+          <mat-select (ngModelChange)="especialiadElegida()" formControlName="idEspecialidad">
+            <mat-option *ngFor="let item of listaEspecialidades" [value]="item.idEspecialidad">
+              {{item.nombre}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="especialidadActiva">
+        <mat-form-field class="form-field">
+          <mat-label>Doctor</mat-label>
+            <mat-select formControlName="idDoctor">
+              <mat-option *ngFor="let item of listaDoctores" [value]="item.personas[0].doctors![0].idDoctor">
+                {{item.personas[0].nombres}} {{item.personas[0].apellidos}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+      </ng-container>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Dni del Paciente</mat-label>
+        <input (keyup.enter)="buscarPaciente()" matInput autocomplete="off" formControlName="dni">
+        <mat-icon matSuffix>badge</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Nombre Paciente</mat-label>
+        <input matInput autocomplete="off" formControlName="nombrePaciente">
+        <mat-icon matSuffix>portrait</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Apellido Paciente</mat-label>
+        <input matInput autocomplete="off" formControlName="apellidoPaciente">
+        <mat-icon matSuffix>portrait</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field class="form-field">
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput autocomplete="off" formControlName="descripcion"></textarea>
+        <mat-icon matSuffix>article</mat-icon>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div *ngIf="!cargando">
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    <button *ngIf="detalleVisto" mat-raised-button color="primary" [disabled]="formulario.invalid" (click)="guardar()">
+      {{botonAccion}}
+    </button>
+  </div>
+  <mat-progress-spinner style="margin: 10px auto;" *ngIf="cargando" diameter="50" mode="indeterminate"></mat-progress-spinner>
+</mat-dialog-actions>

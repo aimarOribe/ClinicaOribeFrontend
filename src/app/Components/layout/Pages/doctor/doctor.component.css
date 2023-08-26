@@ -1,0 +1,79 @@
+.page-title {
+    margin: 20px 0px 0px 40px;
+  }
+  
+  .patient-card {
+    margin: 20px 40px 40px 40px;
+  }
+  
+  .add-button {
+    margin: 20px;
+  }
+  
+  .search-field {
+    margin: 20px 0px 0px 0px;
+  }
+  
+  .table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  .mat-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .mat-cell,
+  .mat-header-cell {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .mat-row,
+  .mat-header-row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mat-row {
+    background-color: #f8f8f8;
+  }
+  
+  .mat-paginator {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .color-icon-desabled{
+    color: #0860A8;
+  }
+  
+  .color-icon-enable{
+    color: #E3202A;
+  }
+
+  .tag-enable {
+    display: inline-block;
+    background-color: #4758B8;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 5px; /* Ajusta esta propiedad según tu preferencia */
+  }
+
+  .tag-desabled {
+    display: inline-block;
+    background-color: #F44A3E;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 5px; /* Ajusta esta propiedad según tu preferencia */
+  }
+
+  
+  

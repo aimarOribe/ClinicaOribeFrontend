@@ -1,0 +1,71 @@
+<h1 class="page-title">Citas</h1>
+
+<mat-card class="patient-card">
+  <mat-card-title>
+    <button mat-raised-button color="primary" class="add-button" (click)="nuevo()">
+      <mat-icon matListItemIcon>add</mat-icon>Nueva Cita
+    </button>
+  </mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content class="dashboard-card-content">
+    <mat-form-field class="search-field">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+    <div class="table-container">
+      <table mat-table [dataSource]="dataLista">
+        <ng-container matColumnDef="Paciente">
+          <th mat-header-cell *matHeaderCellDef>Paciente</th>
+          <td mat-cell *matCellDef="let element"> {{element.nombrePaciente}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Doctor">
+            <th mat-header-cell *matHeaderCellDef>Doctor</th>
+            <td mat-cell *matCellDef="let element"> {{element.nombreDoctor}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechayHoraInicio">
+            <th mat-header-cell *matHeaderCellDef>Fecha y Hora Inicio</th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
+        </ng-container>
+        <ng-container matColumnDef="FechayHoraFin">
+            <th mat-header-cell *matHeaderCellDef>Fecha y Hora Fin</th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Estado">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-chip-option [color]="element.estado === 1 ? 'accent' : element.estado === 2 ? 'primary' : 'warn'" selected>{{element.estado === 1 ? 'Pendiente' : element.estado === 2 ? 'Aprobado' : 'Rechazado'}}</mat-chip-option>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef style="width: 150px;"></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="verDetalle(element)">
+                <mat-icon>visibility</mat-icon>
+                <span>Ver</span>
+              </button>
+              <ng-container *ngIf="element.estado === 1">
+                <button mat-menu-item (click)="aprobar(element.idCita)">
+                  <mat-icon style="color: #528b07;">thumb_up</mat-icon>
+                  <span>Aprobar</span>
+                </button>
+                <button mat-menu-item (click)="rechazar(element.idCita)">
+                  <mat-icon style="color: #F44A3E;">thumb_down</mat-icon>
+                  <span>Rechazar</span>
+                </button>
+              </ng-container>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnasTabla;"></tr>
+      </table>
+      <mat-progress-spinner style="margin: 10px auto;" *ngIf="cargandoTablaDatos" diameter="50" mode="indeterminate"></mat-progress-spinner>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

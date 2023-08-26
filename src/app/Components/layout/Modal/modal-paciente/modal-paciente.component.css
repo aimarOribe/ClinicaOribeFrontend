@@ -1,0 +1,33 @@
+.dialog-title {
+    margin-top: 0;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.form-field {
+    flex: 1;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.mat-icon {
+    color: #757575;
+}
+
+.mat-raised-button {
+    margin-left: 1rem;
+}
+  
